@@ -6,7 +6,8 @@
 #
 
 FROM alpine:latest
-LABEL org.opencontainers.image.source https://github.com/systemx-io/docker-syslog-collector
+LABEL org.opencontainers.image.source=https://github.com/systemx-io/docker-syslog-collector
+LABEL org.opencontainers.image.licenses=BSD-2-Clause
 
 RUN addgroup -g 9999 syslog && \
 	adduser -u 9999 -h /var/empty -g "syslog sandbox" -s /sbin/nologin -G syslog -D -H syslog
