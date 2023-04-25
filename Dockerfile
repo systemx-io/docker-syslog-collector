@@ -5,9 +5,8 @@
 # Writes logs and state to /app/data which should be backed by a volume
 #
 
-LABEL org.opencontainers.image.source https://github.com/systemx-io/docker-syslog-collector
-
 FROM alpine:latest
+LABEL org.opencontainers.image.source https://github.com/systemx-io/docker-syslog-collector
 
 RUN addgroup -g 9999 syslog && \
 	adduser -u 9999 -h /var/empty -g "syslog sandbox" -s /sbin/nologin -G syslog -D -H syslog
