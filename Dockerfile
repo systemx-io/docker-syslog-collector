@@ -24,6 +24,6 @@ EXPOSE 10514
 
 USER syslog
 
-CMD ["rsyslogd", "-f", "/app/config/rsyslog.conf", "-i", "/app/data/state/rsyslogd.pid", "-n"]
+CMD ["rsyslogd", "-f", "/app/config/rsyslog.conf", "-n"]
 
 # EOF
