@@ -16,14 +16,16 @@ RUN apk update && \
 	apk add rsyslog
 
 RUN install -d -D -o root -g syslog -m 0750 /app/config && \
-	install -d -D -o syslog -g syslog -m 0750 /app/data /app/data/state /app/data/queue /app/data/syslog
+	install -d -D -o syslog -g syslog -m 0750 /app/data
 
 ADD ./files/rsyslog.conf /app/config/rsyslog.conf
+ADD --chmod=755 ./files/entrypoint.sh /entrypoint.sh
 
 EXPOSE 10514
 
 USER syslog
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["rsyslogd", "-f", "/app/config/rsyslog.conf", "-n"]
 
 # EOF
