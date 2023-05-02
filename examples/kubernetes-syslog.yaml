@@ -1,0 +1,58 @@
+# Kubernetes manifest file realizing a syslog collection service
+#
+apiVersion: v1
+kind: Pod
+metadata:
+  name: syslog-collector
+  labels:
+    app: syslog-collector
+spec:
+  volumes:
+  - name: syslog-data
+    persistentVolumeClaim:
+      claimName: syslog-data-pvc
+  containers:
+    - name: syslog-collector
+      image: ghcr.io/systemx-io/syslog-collector:1.0.6
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 10514
+      volumeMounts:
+      - mountPath: /app/data
+        name: syslog-data
+    - name: syslog-retention
+      image: ghcr.io/systemx-io/syslog-retention:1.0.1
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+      - mountPath: /app/data
+        name: syslog-data 
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: syslog-data-pvc
+spec:
+  storageClassName: openebs-hostpath
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50G
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syslog
+spec:
+  type: ClusterIP
+  selector:
+    app: syslog-collector
+  ports:
+    - protocol: TCP
+      name: syslog-tcp
+      port: 514
+      targetPort: 10514
+    - protocol: UDP
+      name: syslog-udp
+      port: 514
+      targetPort: 10514
