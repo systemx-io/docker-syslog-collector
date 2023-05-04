@@ -12,11 +12,10 @@ LABEL org.opencontainers.image.licenses=BSD-2-Clause
 RUN addgroup -g 9999 syslog && \
 	adduser -u 9999 -h /var/empty -g "syslog sandbox" -s /sbin/nologin -G syslog -D -H syslog
 
-RUN apk update && \
-	apk add rsyslog
-
 RUN install -d -D -o root -g syslog -m 0750 /app/config && \
 	install -d -D -o syslog -g syslog -m 0750 /app/data
+
+RUN apk add --no-cache rsyslog
 
 ADD ./files/rsyslog.conf /app/config/rsyslog.conf
 ADD --chmod=755 ./files/entrypoint.sh /entrypoint.sh
