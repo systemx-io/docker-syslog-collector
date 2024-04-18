@@ -18,4 +18,5 @@ Outputs:
 
 ## How to build
 Bulding the image locally using Docker Desktop on my M-series MacBook:
+
 `docker buildx build --platform linux/amd64,linux/arm64 --tag ghcr.io/systemx-io/docker-syslog-collector:x.y.z --push .`
