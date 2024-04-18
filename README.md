@@ -6,7 +6,7 @@ Supported architectures:
 * `linux/amd64`
 * `linux/arm64`
 
-## How to use
+## Usage
 You need to provide a volume for the local cache which needs to be mounted at `/app/data`.
 
 Inputs:
@@ -17,4 +17,5 @@ Outputs:
 * File organization: `/app/data/syslog/%HOSTNAME%/%syslogfacility-text%-%$YEAR%-%$MONTH%-%$DAY%.log`.
 
 ## How to build
-`docker buildx build --platform linux/amd64,linux/arm64 --tag ghcr.io/systemx-io/docker-syslog-retention:x.y.z --push .`
+Bulding the image locally using Docker Desktop on my M-series MacBook:
+`docker buildx build --platform linux/amd64,linux/arm64 --tag ghcr.io/systemx-io/docker-syslog-collector:x.y.z --push .`
