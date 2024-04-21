@@ -16,7 +16,7 @@ RUN addgroup -g 9999 syslog && \
 RUN install -d -D -o root -g syslog -m 0750 /app/config && \
 	install -d -D -o syslog -g syslog -m 0750 /app/data
 
-RUN apk add --no-cache rsyslog
+RUN apk add --no-cache rsyslog rsyslog-http
 
 ADD --chmod=444 ./files/rsyslog.conf /app/config/rsyslog.conf
 ADD --chmod=755 ./files/entrypoint.sh /entrypoint.sh
