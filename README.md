@@ -1,7 +1,7 @@
 # docker-syslog-collector
-This repository provides a very simple containerized syslog service.
+This repository provides a very simple containerized syslog service based on [rsyslogd](https://www.rsyslog.com).
 
-The container simply provides a TCP+UDP port and writes syslog messages to the local filesystem. There's also the possibility to forward events to a remote destination using HTTP.
+The container provides a TCP+UDP port and writes syslog messages to the local filesystem. There's also the possibility to forward events to a remote destination using HTTP.
 
 Supported architectures:
 * `linux/amd64`
